@@ -6,30 +6,22 @@ public class WorldGravity : MonoBehaviour
 {
 	[SerializeField]
 	private float gravityСoefficient;
-	private Vector3 massCenter;
+	public Vector3 CenterMass { get => transform.position; }
+
+
 	void Start()
 	{
 		gravityСoefficient = 9.81f;
-		massCenter = transform.position;
-	}
-	void Update()
-	{
-		CangeGarvityForceForChildrens();
 	}
 
-	private void CangeGarvityForceForChildrens()
+	public Vector3 GetGravityDirection(Rigidbody rb)
 	{
-		var childrensRB = GetComponentsInChildren<Rigidbody>();
-		foreach (var childRB in childrensRB)
-		{
-			var gravityForce = CountGravityForce(childRB);
-			childRB.AddForce(gravityForce);
-		}
+		return CenterMass - rb.position;
 	}
 
-	private Vector3 CountGravityForce(Rigidbody rb)
+	public Vector3 CountGravityForce(Rigidbody rb)
 	{
-		var forceDirection = (massCenter - rb.position).normalized;
+		var forceDirection = GetGravityDirection(rb).normalized;
 		var force = rb.mass * gravityСoefficient; //m*g
 		var forceVector = forceDirection * force;
 		return forceVector;
