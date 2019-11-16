@@ -1,6 +1,6 @@
 /Temp/
 /.vs/
-/Library/
+/Library/**
 /Logs/
 /obj/
 /Packages/
