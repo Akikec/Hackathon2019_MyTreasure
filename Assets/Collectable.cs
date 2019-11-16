@@ -18,6 +18,7 @@ public class Collectable : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!this.enabled) return;
         //var col = other.gameObject.GetComponent<Collectable>();
         //var y = col.lenght * 5;
         var y = 5;
