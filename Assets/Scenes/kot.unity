@@ -389,7 +389,7 @@ PrefabInstance:
     - target: {fileID: 2642108875606399466, guid: e67554c37f3f7144595ea56e8ec18ab8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.999
+      value: -1.93
       objectReference: {fileID: 0}
     - target: {fileID: 2642108875606399466, guid: e67554c37f3f7144595ea56e8ec18ab8,
         type: 3}
@@ -399,7 +399,7 @@ PrefabInstance:
     - target: {fileID: 2642108875606399466, guid: e67554c37f3f7144595ea56e8ec18ab8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.513
+      value: 2.74
       objectReference: {fileID: 0}
     - target: {fileID: 2642108875606399466, guid: e67554c37f3f7144595ea56e8ec18ab8,
         type: 3}
@@ -464,8 +464,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravityTo: {fileID: 304306572}
-  gravityScale: 10
-  minGroundedDistance: 0.2
+  "gravity\u0421oefficient": 10
 --- !u!54 &1999183237
 Rigidbody:
   m_ObjectHideFlags: 0
