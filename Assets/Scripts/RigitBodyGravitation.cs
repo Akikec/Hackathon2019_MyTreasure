@@ -5,9 +5,10 @@ using UnityEngine;
 public class RigitBodyGravitation : MonoBehaviour
 {
 	[SerializeField]
-	private WorldGravity world;
+	private Transform gravityTo;
 	private Rigidbody rb;
-	[SerializeField] private float jumpCoeff;
+	[SerializeField] 
+	private float gravityСoefficient;
 
 	void Start()
     {
@@ -17,17 +18,19 @@ public class RigitBodyGravitation : MonoBehaviour
     void Update()
     {
 		AddGravity();
-		if (Input.GetMouseButtonDown(0))
-		{
-			var gravityForce = world.GetGravityDirection(rb);
-			var jumpForce = -1 * jumpCoeff * gravityForce;
-			rb.AddForce(jumpForce);
-		}
 	}
 
 	private void AddGravity()
 	{
-		var gravityForce = world.CountGravityForce(rb);
+		var gravityForce = CountGravityForce(rb);
 		rb.AddForce(gravityForce);
+	}
+
+	public Vector3 CountGravityForce(Rigidbody rb)
+	{
+		var forceDirection = (gravityTo.position - transform.position).normalized;
+		var force = rb.mass * gravityСoefficient; //m*g
+		var forceVector = forceDirection * force;
+		return forceVector;
 	}
 }
