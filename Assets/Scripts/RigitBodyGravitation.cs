@@ -12,17 +12,18 @@ public class RigitBodyGravitation : MonoBehaviour
 	protected float minGroundedDistance;
 	protected Rigidbody rb;
 	protected Vector3 DownDirection { get => gravityTo != null ? gravityTo.position - transform.position : transform.position; }
-	protected Vector3 UpDirection { get => UpDirection * -1; }
+	protected Vector3 UpDirection { get => DownDirection * -1; }
 	protected Vector3 GravitiDirection { get => gravityTo != null ? ClosestGravityPoint(transform.position) - transform.position : transform.position; }
 	public bool IsGrounded { get => GravitiDirection.sqrMagnitude <= minGroundedDistance * minGroundedDistance; }
 
 	void Start()
 	{
 		rb = GetComponent<Rigidbody>();
+		//SetRotationUp();
 	}
 	void FixedUpdate()
 	{
-		AddGravityForce();
+		//AddGravityForce();
 		SetRotationUp();
 	}
 
@@ -48,6 +49,8 @@ public class RigitBodyGravitation : MonoBehaviour
 
 	protected void SetRotationUp()
 	{
-		//transform.rotation = new Quaternion(UpDirection.x, UpDirection.y, UpDirection.z, 0);
+		var _direction = UpDirection.normalized;
+		var _lookRotation = Quaternion.LookRotation(_direction);
+		transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * 1);
 	}
 }
