@@ -5,32 +5,49 @@ using UnityEngine;
 public class RigitBodyGravitation : MonoBehaviour
 {
 	[SerializeField]
-	private Transform gravityTo;
-	private Rigidbody rb;
+	protected Transform gravityTo;
 	[SerializeField]
-	private float gravityСoefficient;
+	protected float gravityScale;
+	[SerializeField]
+	protected float minGroundedDistance;
+	protected Rigidbody rb;
+	protected Vector3 DownDirection { get => gravityTo != null ? gravityTo.position - transform.position : transform.position; }
+	protected Vector3 UpDirection { get => UpDirection * -1; }
+	protected Vector3 GravitiDirection { get => gravityTo != null ? ClosestGravityPoint(transform.position) - transform.position : transform.position; }
+	public bool IsGrounded { get => GravitiDirection.sqrMagnitude <= minGroundedDistance * minGroundedDistance; }
 
 	void Start()
 	{
 		rb = GetComponent<Rigidbody>();
 	}
-
-	void Update()
+	void FixedUpdate()
 	{
-		AddGravity();
+		AddGravityForce();
+		SetRotationUp();
 	}
 
-	private void AddGravity()
+	protected void AddGravityForce()
 	{
-		var gravityForce = CountGravityForce(rb);
-		rb.AddForce(gravityForce);
+		if (!IsGrounded)
+			rb?.AddForce(GravitiDirection.normalized * gravityScale * rb.mass);
 	}
 
-	public Vector3 CountGravityForce(Rigidbody rb)
+	protected Vector3 ClosestGravityPoint(Vector3 position)
 	{
-		var forceDirection = (gravityTo.position - transform.position).normalized;
-		var force = rb.mass * gravityСoefficient; //m*g
-		var forceVector = forceDirection * force;
-		return forceVector;
+		var ray = new Ray(transform.position, DownDirection);
+		if (Physics.Raycast(ray, out var hit))
+		{
+			if (hit.collider != null)
+			{
+				return hit.point;
+			}
+		}
+		return gravityTo.position;
+	}
+
+
+	protected void SetRotationUp()
+	{
+		//transform.rotation = new Quaternion(UpDirection.x, UpDirection.y, UpDirection.z, 0);
 	}
 }
