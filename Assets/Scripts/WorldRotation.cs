@@ -6,6 +6,8 @@ public class WorldRotation : MonoBehaviour
 {
 	[SerializeField]
 	protected Transform gravityTo;
+	[SerializeField]
+	protected float rotationSpeed;
 	protected Vector3 DownDirection { get => gravityTo != null ? gravityTo.position - transform.position : transform.position; }
 	protected Vector3 UpDirection { get => DownDirection * -1; }
 	protected Vector3 GravitiDirection { get => gravityTo != null ? ClosestGravityPoint(transform.position) - transform.position : transform.position; }
@@ -32,6 +34,6 @@ public class WorldRotation : MonoBehaviour
 	{
 		var _direction = UpDirection.normalized;
 		var _lookRotation = Quaternion.LookRotation(_direction);
-		transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * 1);
+		transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * rotationSpeed);
 	}
 }

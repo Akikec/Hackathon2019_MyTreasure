@@ -28,7 +28,11 @@ public class RigitBodyGravitation : MonoBehaviour
 	protected void AddGravityForce()
 	{
 		if (!IsGrounded)
+		{
+			
 			rb?.AddForce(GravitiDirection.normalized * gravityScale * rb.mass);
+		}
+		else rb.velocity = Vector3.zero;
 	}
 
 	protected Vector3 ClosestGravityPoint(Vector3 position)

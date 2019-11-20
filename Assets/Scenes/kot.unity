@@ -394,6 +394,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravityTo: {fileID: 304306572}
+  rotationSpeed: 10
 --- !u!4 &1689474213
 Transform:
   m_ObjectHideFlags: 0
@@ -436,7 +437,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gravityTo: {fileID: 304306572}
   gravityScale: 10
-  minGroundedDistance: 0.2
+  minGroundedDistance: 0.01
 --- !u!54 &1689474216
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -535,21 +536,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1999183234}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1999183236
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1999183235}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e55987a595d57145811ecc3c3a71fc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gravityTo: {fileID: 304306572}
-  gravityScale: 10
-  minGroundedDistance: 0.2
 --- !u!4 &1999183239 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2642108875606399466, guid: e67554c37f3f7144595ea56e8ec18ab8,
